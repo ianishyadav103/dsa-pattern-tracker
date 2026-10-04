@@ -4,7 +4,7 @@ A lightweight interactive dashboard to master Data Structures & Algorithms throu
 
 ---
 
-* **Original List & Methodology:** Created by **Ashish Pratap Singh** ([@ashishps_1]([https://x.com/ashishps_1](https://www.youtube.com/@ashishps_1)))  Adjusted slightly by trimming redundant problems and adding key replacements for better pattern balance.
+* **Original List & Methodology:** Created by **Ashish Pratap Singh** ([@ashishps_1]([https://x.com/ashishps_1](https://www.youtube.com/@ashishps_1))) Adjusted slightly by trimming redundant problems and adding key replacements for better pattern balance.
 
 * **Dashboard Design & Enhancements:** Developed with AI assistance (Gemini)
 
