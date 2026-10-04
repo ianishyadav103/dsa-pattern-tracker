@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-colorful">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Preparation Roadmap - Essential-First 30 Patterns</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS Theme Variables with Comprehensive Coverage */
+        :root,
+        html.theme-colorful {
+            --bg-main: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.75);
+            --bg-card-inner: #0f172a;
+            --bg-input: #1e293b;
+            --bg-drawer: #020617;
+            --border-main: rgba(255, 255, 255, 0.1);
+            --border-card: #334155;
+            --border-priority: #6366f1;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-sub: #cbd5e1;
+            --accent-primary: #818cf8;
+            --accent-gradient-from: #6366f1;
+            --accent-gradient-via: #a855f7;
+            --accent-gradient-to: #ec4899;
+            --pill-bg: #1e1b4b;
+            --pill-border: #4338ca;
+            --pill-text: #c7d2fe;
+            --badge-easy-bg: #064e3b;
+            --badge-easy-text: #34d399;
+            --badge-medium-bg: #78350f;
+            --badge-medium-text: #fbbf24;
+            --badge-hard-bg: #7f1d1d;
+            --badge-hard-text: #f87171;
+            --btn-sec-bg: #1e293b;
+            --btn-sec-text: #f1f5f9;
+            --btn-sec-border: #334155;
+        }
+
+        html.theme-dark {
+            --bg-main: #090d16;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --bg-card-inner: #0b0f19;
+            --bg-input: #111827;
+            --bg-drawer: #030712;
+            --border-main: rgba(255, 255, 255, 0.08);
+            --border-card: #1e293b;
+            --border-priority: #4f46e5;
+            --text-main: #f3f4f6;
+            --text-muted: #6b7280;
+            --text-sub: #9ca3af;
+            --accent-primary: #6366f1;
+            --accent-gradient-from: #4f46e5;
+            --accent-gradient-via: #3b82f6;
+            --accent-gradient-to: #1d4ed8;
+            --pill-bg: #111827;
+            --pill-border: #374151;
+            --pill-text: #9ca3af;
+            --badge-easy-bg: #022c22;
+            --badge-easy-text: #10b981;
+            --badge-medium-bg: #451a03;
+            --badge-medium-text: #f59e0b;
+            --badge-hard-bg: #450a0a;
+            --badge-hard-text: #ef4444;
+            --btn-sec-bg: #1f2937;
+            --btn-sec-text: #e5e7eb;
+            --btn-sec-border: #374151;
+        }
+
+        html.theme-light {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-inner: #f1f5f9;
+            --bg-input: #ffffff;
+            --bg-drawer: #ffffff;
+            --border-main: #e2e8f0;
+            --border-card: #cbd5e1;
+            --border-priority: #3b82f6;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --text-sub: #334155;
+            --accent-primary: #2563eb;
+            --accent-gradient-from: #2563eb;
+            --accent-gradient-via: #3b82f6;
+            --accent-gradient-to: #0284c7;
+            --pill-bg: #eff6ff;
+            --pill-border: #bfdbfe;
+            --pill-text: #1d4ed8;
+            --badge-easy-bg: #d1fae5;
+            --badge-easy-text: #047857;
+            --badge-medium-bg: #fef3c7;
+            --badge-medium-text: #b45309;
+            --badge-hard-bg: #fee2e2;
+            --badge-hard-text: #b91c1c;
+            --btn-sec-bg: #e2e8f0;
+            --btn-sec-text: #0f172a;
+            --btn-sec-border: #cbd5e1;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .glass {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-main);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 9999px;
+            opacity: 0.5;
+        }
+
+        .card-glow-priority {
+            border-color: var(--border-priority) !important;
+            box-shadow: 0 0 15px -3px rgba(99, 102, 241, 0.25);
+        }
+
+        /* Dynamic classes mapping to CSS Variables */
+        .bg-theme-card-inner {
+            background-color: var(--bg-card-inner);
+        }
+
+        .bg-theme-input {
+            background-color: var(--bg-input);
+        }
+
+        .bg-theme-drawer {
+            background-color: var(--bg-drawer);
+        }
+
+        .border-theme-card {
+            border-color: var(--border-card);
+        }
+
+        .border-theme-main {
+            border-color: var(--border-main);
+        }
+
+        .text-theme-main {
+            color: var(--text-main);
+        }
+
+        .text-theme-muted {
+            color: var(--text-muted);
+        }
+
+        .text-theme-sub {
+            color: var(--text-sub);
+        }
+
+        .text-theme-accent {
+            color: var(--accent-primary);
+        }
+
+        .bg-theme-pill {
+            background-color: var(--pill-bg);
+        }
+
+        .border-theme-pill {
+            border-color: var(--pill-border);
+        }
+
+        .text-theme-pill {
+            color: var(--pill-text);
+        }
+
+        .btn-secondary {
+            background-color: var(--btn-sec-bg);
+            color: var(--btn-sec-text);
+            border: 1px solid var(--btn-sec-border);
+        }
+
+        .badge-easy {
+            background-color: var(--badge-easy-bg);
+            color: var(--badge-easy-text);
+        }
+
+        .badge-medium {
+            background-color: var(--badge-medium-bg);
+            color: var(--badge-medium-text);
+        }
+
+        .badge-hard {
+            background-color: var(--badge-hard-bg);
+            color: var(--badge-hard-text);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen font-sans transition-colors duration-300 custom-scrollbar antialiased pb-12">
+    <header class="sticky top-0 z-40 border-b border-theme-main glass">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/20">
+                    🎯
+                </div>
+                <div>
+                    <h1
+                        class="text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        DSA Preparation Roadmap
+                    </h1>
+                    <p class="text-xs text-theme-muted font-medium">Logical 10-Group Progression • 3 Patterns Per Group
+                        (30 Total Patterns)</p>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+                <!-- Tri-Mode Theme Toggle Button -->
+                <button id="themeToggleBtn" onclick="cycleTheme()"
+                    class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg btn-secondary transition-all flex items-center gap-1.5 shadow-sm">
+                    <span id="themeIcon">🎨</span> <span id="themeLabel" class="hidden sm:inline">Colorful</span>
+                </button>
+
+                <button id="toggleGuideBtn" onclick="toggleGuide()"
+                    class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 transition-all flex items-center gap-1.5">
+                    <span>💡</span> <span class="hidden sm:inline">Strategy Guide</span>
+                </button>
+                <button id="exportBtn" onclick="exportData()"
+                    class="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-lg btn-secondary transition-all flex items-center gap-1.5">
+                    <span>📥</span> <span class="hidden sm:inline">Export</span>
+                </button>
+                <button id="importBtn" onclick="triggerImport()"
+                    class="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-lg btn-secondary transition-all flex items-center gap-1.5">
+                    <span>📤</span> <span class="hidden sm:inline">Import</span>
+                </button>
+                <input type="file" id="importInput" class="hidden" accept=".json" onchange="importData(event)">
+                <button id="resetDataBtn" onclick="openResetStep1()"
+                    class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition-all flex items-center gap-1.5">
+                    <span>🔄</span> <span>Reset</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- Strategy Guide Card -->
+        <section id="guideCard"
+            class="glass rounded-2xl p-6 border border-theme-main relative overflow-hidden transition-all duration-300">
+            <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-2 text-theme-accent font-bold text-lg">
+                    <span>🧠</span> Instructions
+                </div>
+                <button onclick="toggleGuide()"
+                    class="text-theme-muted hover:text-theme-main text-sm font-medium">Dismiss ✕</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm text-theme-sub">
+                <div class="p-3.5 rounded-xl bg-theme-card-inner border border-theme-card">
+                    <span class="font-bold text-theme-accent block mb-1">⭐ 1. Essential-First Ordering</span>
+                    The 10 Top-Priority patterns are grouped first (Essential), allowing you to master high-frequency
+                    interview patterns before advancing to intermediate and specialized techniques.
+                </div>
+                <div class="p-3.5 rounded-xl bg-theme-card-inner border border-theme-card">
+                    <span class="font-bold text-theme-accent block mb-1">🎯 Interleaved Learning & 2-2-2 Execution</span>
+                    Rotating 3 patterns at a time prevents autopilot. Solve <b>First 2</b> for understanding, <b>Next
+                        2</b> for repetition, and <b>Last 2</b> for challenge.
+                </div>
+                <div class="p-3.5 rounded-xl bg-theme-card-inner border border-theme-card">
+                    <span class="font-bold text-theme-accent block mb-1">📝 Custom Boilerplates</span>
+                    Expand the <b>Notes</b> drawer on any pattern to inspect or customize ready-to-use template code
+                    structures.
+                    .
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Stats Overview Banner -->
+        <section class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Overall Progress Box -->
+            <div class="lg:col-span-3 glass rounded-2xl p-6 flex flex-col justify-between border border-theme-main">
+                <div class="flex flex-wrap justify-between items-end gap-4 mb-4">
+                    <div>
+                        <span class="text-xs uppercase font-bold tracking-wider text-theme-muted">Total Interview
+                            Readiness</span>
+                        <div class="flex items-baseline gap-3 mt-1">
+                            <span id="overallPercentage"
+                                class="text-4xl sm:text-5xl font-extrabold text-theme-accent font-mono">0%</span>
+                            <span id="overallStats" class="text-sm font-semibold text-theme-muted">0 of 180
+                                Solved</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 sm:gap-4 text-center">
+                        <div class="px-3.5 py-2 rounded-xl badge-easy border border-emerald-500/30">
+                            <div id="easyStats" class="text-lg font-bold font-mono">0/0</div>
+                            <div class="text-[10px] font-bold uppercase tracking-wider">Easy</div>
+                        </div>
+                        <div class="px-3.5 py-2 rounded-xl badge-medium border border-amber-500/30">
+                            <div id="mediumStats" class="text-lg font-bold font-mono">0/0</div>
+                            <div class="text-[10px] font-bold uppercase tracking-wider">Medium</div>
+                        </div>
+                        <div class="px-3.5 py-2 rounded-xl badge-hard border border-rose-500/30">
+                            <div id="hardStats" class="text-lg font-bold font-mono">0/0</div>
+                            <div class="text-[10px] font-bold uppercase tracking-wider">Hard</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Segmented Progress Bar -->
+                <div class="space-y-1.5">
+                    <div
+                        class="w-full h-4 bg-theme-card-inner rounded-full overflow-hidden p-0.5 border border-theme-card flex gap-0.5">
+                        <div id="segmentEasy" class="h-full bg-emerald-500 transition-all duration-500 rounded-l-full"
+                            style="width: 0%"></div>
+                        <div id="segmentMedium" class="h-full bg-amber-500 transition-all duration-500"
+                            style="width: 0%"></div>
+                        <div id="segmentHard" class="h-full bg-rose-500 transition-all duration-500 rounded-r-full"
+                            style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-theme-muted font-medium">
+                        <span id="easySegmentText" class="font-semibold text-emerald-500">Easy: 0%</span>
+                        <span id="mediumSegmentText" class="font-semibold text-amber-500">Medium: 0%</span>
+                        <span id="hardSegmentText" class="font-semibold text-rose-500">Hard: 0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority Progress Stats Mini Card -->
+            <div class="glass rounded-2xl p-6 flex flex-col justify-between border border-theme-main">
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-theme-muted">Core 11 Essential
+                            Patterns</span>
+                        <span
+                            class="text-xs px-2 py-0.5 rounded-full bg-theme-pill border border-theme-pill text-theme-pill font-semibold">Groups
+                            1 - 4</span>
+                    </div>
+                    <div class="text-2xl font-extrabold text-theme-main font-mono mt-1" id="top10StatsText">
+                        0 / 66
+                    </div>
+                    <p class="text-xs text-theme-muted mt-1">Foundational high-frequency patterns structured across
+                        initial groups.</p>
+                </div>
+                <div class="mt-4">
+                    <div class="w-full h-2.5 bg-theme-card-inner rounded-full overflow-hidden border border-theme-card">
+                        <div id="top10ProgressBar"
+                            class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500"
+                            style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filters -->
+        <section
+            class="glass rounded-2xl p-4 border border-theme-main flex flex-col md:flex-row gap-4 justify-between items-center">
+            <div class="relative w-full md:w-80">
+                <span
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-theme-muted text-sm">🔍</span>
+                <input type="text" id="searchInput" oninput="renderRoadmap()"
+                    placeholder="Search title, #, or pattern..."
+                    class="w-full pl-9 pr-4 py-2 bg-theme-input border border-theme-card rounded-xl text-sm text-theme-main placeholder-theme-muted focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <div class="flex items-center gap-1.5 flex-wrap w-full md:w-auto justify-start md:justify-end">
+                <button onclick="setFilter('all')" id="filter-all"
+                    class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-indigo-600 text-white shadow-md">All
+                    Groups</button>
+                <button onclick="setFilter('top10')" id="filter-top10"
+                    class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-theme-muted btn-secondary">⭐
+                    Essential First</button>
+                <button onclick="setFilter('pending')" id="filter-pending"
+                    class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-theme-muted btn-secondary">⏳
+                    Pending</button>
+                <button onclick="setFilter('completed')" id="filter-completed"
+                    class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-theme-muted btn-secondary">✅
+                    Completed</button>
+                <div class="h-4 w-px bg-theme-card mx-1 hidden sm:block"></div>
+                <button onclick="setFilter('easy')" id="filter-easy"
+                    class="filter-btn px-2.5 py-1.5 rounded-lg text-xs font-bold badge-easy">Easy</button>
+                <button onclick="setFilter('medium')" id="filter-medium"
+                    class="filter-btn px-2.5 py-1.5 rounded-lg text-xs font-bold badge-medium">Medium</button>
+                <button onclick="setFilter('hard')" id="filter-hard"
+                    class="filter-btn px-2.5 py-1.5 rounded-lg text-xs font-bold badge-hard">Hard</button>
+            </div>
+        </section>
+
+        <!-- Grouped Roadmap Container -->
+        <div id="roadmapContainer" class="space-y-8">
+            <!-- Dynamic Injection -->
+        </div>
+
+    </main>
+
+    <!-- Reset Modal -->
+    <div id="resetModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+        <div class="glass max-w-md w-full rounded-2xl p-6 border border-rose-500/30 space-y-5 relative">
+            <div id="resetStep1">
+                <div
+                    class="w-12 h-12 rounded-full bg-rose-500/10 text-rose-500 flex items-center justify-center text-2xl mb-3 border border-rose-500/20">
+                    ⚠️</div>
+                <h3 class="text-xl font-bold text-theme-main">Reset Progress & Notes?</h3>
+                <p class="text-sm text-theme-sub mt-2 leading-relaxed">
+                    This action will clear all checked problem statuses and saved notes stored in your browser.
+                </p>
+                <div class="flex justify-end gap-3 mt-6">
+                    <button onclick="closeResetModal()"
+                        class="px-4 py-2 text-sm font-semibold rounded-xl btn-secondary">Cancel</button>
+                    <button onclick="openResetStep2()"
+                        class="px-4 py-2 text-sm font-semibold rounded-xl bg-rose-600 hover:bg-rose-500 text-white shadow-lg">Proceed</button>
+                </div>
+            </div>
+
+            <div id="resetStep2" class="hidden">
+                <div
+                    class="w-12 h-12 rounded-full bg-rose-600 text-white flex items-center justify-center text-2xl mb-3 shadow-lg">
+                    💥</div>
+                <h3 class="text-xl font-bold text-rose-500">Final Confirmation</h3>
+                <p class="text-sm text-theme-sub mt-2">
+                    Type <span
+                        class="font-mono bg-theme-input px-1.5 py-0.5 rounded border border-theme-card text-rose-400 font-bold">RESET</span>
+                    to confirm erase.
+                </p>
+                <div class="mt-4">
+                    <input type="text" id="resetConfirmInput" placeholder="Type RESET" onkeyup="checkResetTyped()"
+                        class="w-full px-3.5 py-2.5 bg-theme-input border border-theme-card rounded-xl font-mono text-sm text-theme-main focus:outline-none focus:ring-2 focus:ring-rose-500">
+                </div>
+                <div class="flex justify-end gap-3 mt-6">
+                    <button onclick="closeResetModal()"
+                        class="px-4 py-2 text-sm font-semibold rounded-xl btn-secondary">Cancel</button>
+                    <button id="finalResetBtn" disabled onclick="executeResetData()"
+                        class="px-4 py-2 text-sm font-semibold rounded-xl bg-rose-600/50 text-slate-400 cursor-not-allowed">Erase
+                        Everything</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const STARTER_TEMPLATES = {
+            1: `// Sliding Window Template\nfunction slidingWindow(arr, k) {\n  let left = 0, currentSum = 0, maxVal = 0;\n  for (let right = 0; right < arr.length; right++) {\n    currentSum += arr[right];\n    if (right - left + 1 > k) {\n      currentSum -= arr[left++];\n    }\n    maxVal = Math.max(maxVal, currentSum);\n  }\n  return maxVal;\n}`,
+            2: `// Two Pointers Template\nfunction twoPointers(arr, target) {\n  let left = 0, right = arr.length - 1;\n  while (left < right) {\n    let sum = arr[left] + arr[right];\n    if (sum === target) return [left, right];\n    else if (sum < target) left++;\n    else right--;\n  }\n  return [];\n}`,
+            3: `// Hashing / Frequency Map\nfunction frequencyMap(arr) {\n  const map = new Map();\n  for (const item of arr) {\n    map.set(item, (map.get(item) || 0) + 1);\n  }\n  return map;\n}`,
+            4: `// Binary Search Template\nfunction binarySearch(nums, target) {\n  let left = 0, right = nums.length - 1;\n  while (left <= right) {\n    let mid = Math.floor((left + right) / 2);\n    if (nums[mid] === target) return mid;\n    if (nums[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}`,
+            5: `// Prefix Sum Template\nfunction prefixSum(nums) {\n  let pref = new Array(nums.length + 1).fill(0);\n  for (let i = 0; i < nums.length; i++) {\n    pref[i + 1] = pref[i] + nums[i];\n  }\n  return pref;\n}`,
+            6: `// Monotonic Stack Template\nfunction nextGreaterElement(nums) {\n  let res = new Array(nums.length).fill(-1);\n  let stack = [];\n  for (let i = 0; i < nums.length; i++) {\n    while (stack.length && nums[stack[stack.length - 1]] < nums[i]) {\n      res[stack.pop()] = nums[i];\n    }\n    stack.push(i);\n  }\n  return res;\n}`,
+            7: `// Heap / Priority Queue\nclass MinHeap {\n  constructor() { this.heap = []; }\n  push(val) { this.heap.push(val); this.heap.sort((a,b)=>a-b); }\n  pop() { return this.heap.shift(); }\n}`,
+            8: `// Intervals Merge Template\nfunction mergeIntervals(intervals) {\n  intervals.sort((a, b) => a[0] - b[0]);\n  let res = [intervals[0]];\n  for (let i = 1; i < intervals.length; i++) {\n    let prev = res[res.length - 1];\n    if (intervals[i][0] <= prev[1]) prev[1] = Math.max(prev[1], intervals[i][1]);\n    else res.push(intervals[i]);\n  }\n  return res;\n}`,
+            9: `// Tree DFS Recursive Template\nfunction dfs(root) {\n  if (!root) return 0;\n  let left = dfs(root.left);\n  let right = dfs(root.right);\n  return Math.max(left, right) + 1;\n}`,
+            10: `// Graph Grid Traversal\nfunction numIslands(grid) {\n  function dfs(r, c) {\n    if (r<0||c<0||r>=grid.length||c>=grid[0].length||grid[r][c]==='0') return;\n    grid[r][c] = '0';\n    dfs(r+1, c); dfs(r-1, c); dfs(r, c+1); dfs(r, c-1);\n  }\n}`,
+            11: `// 1D Dynamic Programming\nfunction climbStairs(n) {\n  let dp = new Array(n + 1).fill(0);\n  dp[0] = 1; dp[1] = 1;\n  for (let i = 2; i <= n; i++) dp[i] = dp[i-1] + dp[i-2];\n  return dp[n];\n}`,
+            12: `// Fast & Slow Pointers (Linked List Cycle)\nfunction hasCycle(head) {\n  let slow = head, fast = head;\n  while (fast && fast.next) {\n    slow = slow.next;\n    fast = fast.next.next;\n    if (slow === fast) return true;\n  }\n  return false;\n}`,
+            13: `// Monotonic Deque Template\nfunction maxSlidingWindow(nums, k) {\n  let deque = [], res = [];\n  for (let i = 0; i < nums.length; i++) {\n    if (deque.length && deque[0] <= i - k) deque.shift();\n    while (deque.length && nums[deque[deque.length - 1]] <= nums[i]) deque.pop();\n    deque.push(i);\n    if (i >= k - 1) res.push(nums[deque[0]]);\n  }\n  return res;\n}`,
+            14: `// LRU Cache Skeletal Structure\nclass LRUCache {\n  constructor(capacity) {\n    this.capacity = capacity;\n    this.map = new Map();\n  }\n}`
+        };
+
+        // Strictly 10 Groups with Exactly 3 Patterns Each (30 Patterns Total)
+        // Groups 1, 2, 3 contain top essentials. Group 4 contains top 2 essentials + 1 non-essential filler.
+        const GROUPS_DATA = [
+            {
+                groupId: 1,
+                groupName: "Group 1: Foundational Array & Hashing Primitives",
+                description: "Essential fundamental techniques for continuous arrays, pointers, and frequency maps.",
+                patterns: [
+                    {
+                        id: 1,
+                        name: "Sliding Window",
+                        isEssential: true,
+                        problems: [
+                            {id: 121, title: "Best Time to Buy and Sell Stock", diff: "E"},
+                            {id: 3, title: "Longest Substring Without Repeating Characters", diff: "M"},
+                            {id: 76, title: "Minimum Window Substring", diff: "H"},
+                            {id: 209, title: "Minimum Size Subarray Sum", diff: "M"},
+                            {id: 424, title: "Longest Repeating Character Replacement", diff: "M"},
+                            {id: 567, title: "Permutation in String", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Two Pointers",
+                        isEssential: true,
+                        problems: [
+                            {id: 125, title: "Valid Palindrome", diff: "E"},
+                            {id: 11, title: "Container With Most Water", diff: "M"},
+                            {id: 15, title: "3Sum", diff: "M"},
+                            {id: 16, title: "3Sum Closest", diff: "M"},
+                            {id: 42, title: "Trapping Rain Water", diff: "H"},
+                            {id: 167, title: "Two Sum II - Input Array Is Sorted", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "Hashing / Frequency Maps",
+                        isEssential: true,
+                        problems: [
+                            {id: 1, title: "Two Sum", diff: "E"},
+                            {id: 49, title: "Group Anagrams", diff: "M"},
+                            {id: 128, title: "Longest Consecutive Sequence", diff: "M"},
+                            {id: 217, title: "Contains Duplicate", diff: "E"},
+                            {id: 242, title: "Valid Anagram", diff: "E"},
+                            {id: 347, title: "Top K Frequent Elements", diff: "M"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 2,
+                groupName: "Group 2: Binary Search, Ranges & Stacks",
+                description: "Sub-logarithmic search bounds, cumulative ranges, and monotonic stacks.",
+                patterns: [
+                    {
+                        id: 4,
+                        name: "Binary Search on Sorted Data",
+                        isEssential: true,
+                        problems: [
+                            {id: 704, title: "Binary Search", diff: "E"},
+                            {id: 33, title: "Search in Rotated Sorted Array", diff: "M"},
+                            {id: 34, title: "Find First and Last Position of Element in Sorted Array", diff: "M"},
+                            {id: 35, title: "Search Insert Position", diff: "E"},
+                            {id: 153, title: "Find Minimum in Rotated Sorted Array", diff: "M"},
+                            {id: 162, title: "Find Peak Element", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 5,
+                        name: "Prefix Sum / Running Sum",
+                        isEssential: true,
+                        problems: [
+                            {id: 303, title: "Range Sum Query - Immutable", diff: "E"},
+                            {id: 560, title: "Subarray Sum Equals K", diff: "M"},
+                            {id: 724, title: "Find Pivot Index", diff: "E"},
+                            {id: 930, title: "Binary Subarrays With Sum", diff: "M"},
+                            {id: 974, title: "Subarray Sums Divisible by K", diff: "M"},
+                            {id: 523, title: "Continuous Subarray Sum", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 6,
+                        name: "Monotonic Stack",
+                        isEssential: true,
+                        problems: [
+                            {id: 20, title: "Valid Parentheses", diff: "E"},
+                            {id: 150, title: "Evaluate Reverse Polish Notation", diff: "M"},
+                            {id: 739, title: "Daily Temperatures", diff: "M"},
+                            {id: 496, title: "Next Greater Element I", diff: "E"},
+                            {id: 84, title: "Largest Rectangle in Histogram", diff: "H"},
+                            {id: 85, title: "Maximal Rectangle", diff: "H"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 3,
+                groupName: "Group 3: Heaps, Intervals & Tree Traversals",
+                description: "Priority elements, overlapping interval merging, and tree depth queries.",
+                patterns: [
+                    {
+                        id: 7,
+                        name: "Heap / Top K & Dual Heap",
+                        isEssential: true,
+                        problems: [
+                            {id: 215, title: "Kth Largest Element in an Array", diff: "M"},
+                            {id: 295, title: "Find Median from Data Stream", diff: "H"},
+                            {id: 692, title: "Top K Frequent Words", diff: "M"},
+                            {id: 703, title: "Kth Largest Element in a Stream", diff: "E"},
+                            {id: 973, title: "K Closest Points to Origin", diff: "M"},
+                            {id: 1046, title: "Last Stone Weight", diff: "E"}
+                        ]
+                    },
+                    {
+                        id: 8,
+                        name: "Intervals",
+                        isEssential: true,
+                        problems: [
+                            {id: 56, title: "Merge Intervals", diff: "M"},
+                            {id: 57, title: "Insert Interval", diff: "M"},
+                            {id: 252, title: "Meeting Rooms", diff: "E"},
+                            {id: 253, title: "Meeting Rooms II", diff: "M"},
+                            {id: 435, title: "Non-overlapping Intervals", diff: "M"},
+                            {id: 452, title: "Minimum Number of Arrows to Burst Balloons", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 9,
+                        name: "Tree DFS & LCA",
+                        isEssential: true,
+                        problems: [
+                            {id: 226, title: "Invert Binary Tree", diff: "E"},
+                            {id: 100, title: "Same Tree", diff: "E"},
+                            {id: 236, title: "Lowest Common Ancestor of Binary Tree", diff: "M"},
+                            {id: 104, title: "Maximum Depth of Binary Tree", diff: "E"},
+                            {id: 543, title: "Diameter of Binary Tree", diff: "E"},
+                            {id: 124, title: "Binary Tree Maximum Path Sum", diff: "H"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 4,
+                groupName: "Group 4: Grid Traversal, Basic DP & List Pointers",
+                description: "Completing essential core patterns combined with list cycle detection.",
+                patterns: [
+                    {
+                        id: 10,
+                        name: "Graph DFS / Matrix Traversal",
+                        isEssential: true,
+                        problems: [
+                            {id: 200, title: "Number of Islands", diff: "M"},
+                            {id: 695, title: "Max Area of Island", diff: "M"},
+                            {id: 130, title: "Surrounded Regions", diff: "M"},
+                            {id: 417, title: "Pacific Atlantic Water Flow", diff: "M"},
+                            {id: 733, title: "Flood Fill", diff: "E"},
+                            {id: 1020, title: "Number of Enclaves", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 11,
+                        name: "1D Dynamic Programming",
+                        isEssential: true,
+                        problems: [
+                            {id: 70, title: "Climbing Stairs", diff: "E"},
+                            {id: 198, title: "House Robber", diff: "M"},
+                            {id: 213, title: "House Robber II", diff: "M"},
+                            {id: 322, title: "Coin Change", diff: "M"},
+                            {id: 139, title: "Word Break", diff: "M"},
+                            {id: 300, title: "Longest Increasing Subsequence", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 12,
+                        name: "Fast/Slow Pointers (Linked List)",
+                        isEssential: false, // Non-essential filler to complete 3-item constraint
+                        problems: [
+                            {id: 141, title: "Linked List Cycle", diff: "E"},
+                            {id: 142, title: "Linked List Cycle II", diff: "M"},
+                            {id: 19, title: "Remove Nth Node From End of List", diff: "M"},
+                            {id: 876, title: "Middle of the Linked List", diff: "E"},
+                            {id: 160, title: "Intersection of Two Linked Lists", diff: "E"},
+                            {id: 234, title: "Palindrome Linked List", diff: "E"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 5,
+                groupName: "Group 5: Deque Utilities & List Manipulation",
+                description: "Advanced sliding windows, linked list operations, and LRU cache design.",
+                patterns: [
+                    {
+                        id: 13,
+                        name: "Monotonic Queue / Deque",
+                        isEssential: false,
+                        problems: [
+                            {id: 239, title: "Sliding Window Maximum", diff: "H"},
+                            {id: 862, title: "Shortest Subarray with Sum at Least K", diff: "H"},
+                            {id: 1425, title: "Constrained Subsequence Sum", diff: "H"},
+                            {id: 1438, title: "Longest Continuous Subarray With Limit", diff: "M"},
+                            {id: 1499, title: "Max Value of Equation", diff: "H"},
+                            {id: 1696, title: "Jump Game VI", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 14,
+                        name: "Linked List Manipulation & LRU",
+                        isEssential: false,
+                        problems: [
+                            {id: 146, title: "LRU Cache", diff: "M"},
+                            {id: 21, title: "Merge Two Sorted Lists", diff: "E"},
+                            {id: 23, title: "Merge k Sorted Lists", diff: "H"},
+                            {id: 24, title: "Swap Nodes in Pairs", diff: "M"},
+                            {id: 25, title: "Reverse Nodes in k-Group", diff: "H"},
+                            {id: 138, title: "Copy List with Random Pointer", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 15,
+                        name: "Binary Search on Answer",
+                        isEssential: false,
+                        problems: [
+                            {id: 875, title: "Koko Eating Bananas", diff: "M"},
+                            {id: 1011, title: "Capacity To Ship Packages Within D Days", diff: "M"},
+                            {id: 410, title: "Split Array Largest Sum", diff: "H"},
+                            {id: 774, title: "Minimize Max Distance to Gas Station", diff: "H"},
+                            {id: 1283, title: "Find the Smallest Divisor Given Threshold", diff: "M"},
+                            {id: 1482, title: "Minimum Number of Days to Make m Bouquets", diff: "M"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 6,
+                groupName: "Group 6: Range Updates & Low-Level Operations",
+                description: "Difference array manipulations, bitwise tricks, and greedy choices.",
+                patterns: [
+                    {
+                        id: 16,
+                        name: "Difference Array / Range Updates",
+                        isEssential: false,
+                        problems: [
+                            {id: 370, title: "Range Addition", diff: "M"},
+                            {id: 1094, title: "Car Pooling", diff: "M"},
+                            {id: 1109, title: "Corporate Flight Bookings", diff: "M"},
+                            {id: 1893, title: "Check if All Integers in Range Covered", diff: "E"},
+                            {id: 1943, title: "Describe the Painting", diff: "M"},
+                            {id: 2381, title: "Shifting Letters II", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 17,
+                        name: "Bit Manipulation",
+                        isEssential: false,
+                        problems: [
+                            {id: 136, title: "Single Number", diff: "E"},
+                            {id: 137, title: "Single Number II", diff: "M"},
+                            {id: 191, title: "Number of 1 Bits", diff: "E"},
+                            {id: 338, title: "Counting Bits", diff: "E"},
+                            {id: 268, title: "Missing Number", diff: "E"},
+                            {id: 190, title: "Reverse Bits", diff: "E"}
+                        ]
+                    },
+                    {
+                        id: 18,
+                        name: "Greedy Scheduling / Sorting",
+                        isEssential: false,
+                        problems: [
+                            {id: 45, title: "Jump Game II", diff: "M"},
+                            {id: 55, title: "Jump Game", diff: "M"},
+                            {id: 406, title: "Queue Reconstruction by Height", diff: "M"},
+                            {id: 621, title: "Task Scheduler", diff: "M"},
+                            {id: 763, title: "Partition Labels", diff: "M"},
+                            {id: 134, title: "Gas Station", diff: "M"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 7,
+                groupName: "Group 7: Tree BFS & BST Navigation",
+                description: "Level order traversals and binary search tree properties.",
+                patterns: [
+                    {
+                        id: 19,
+                        name: "Tree BFS / Level Order",
+                        isEssential: false,
+                        problems: [
+                            {id: 102, title: "Binary Tree Level Order Traversal", diff: "M"},
+                            {id: 103, title: "Binary Tree Zigzag Level Order Traversal", diff: "M"},
+                            {id: 199, title: "Binary Tree Right Side View", diff: "M"},
+                            {id: 515, title: "Find Largest Value in Each Tree Row", diff: "M"},
+                            {id: 637, title: "Average of Levels in Binary Tree", diff: "E"},
+                            {id: 116, title: "Populating Next Right Pointers in Each Node", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 20,
+                        name: "BST Operations",
+                        isEssential: false,
+                        problems: [
+                            {id: 98, title: "Validate Binary Search Tree", diff: "M"},
+                            {id: 230, title: "Kth Smallest Element in a BST", diff: "M"},
+                            {id: 235, title: "Lowest Common Ancestor of a BST", diff: "M"},
+                            {id: 700, title: "Search in a Binary Search Tree", diff: "E"},
+                            {id: 701, title: "Insert into a Binary Search Tree", diff: "M"},
+                            {id: 450, title: "Delete Node in a BST", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 21,
+                        name: "Backtracking / Subsets & Permutations",
+                        isEssential: false,
+                        problems: [
+                            {id: 78, title: "Subsets", diff: "M"},
+                            {id: 90, title: "Subsets II", diff: "M"},
+                            {id: 46, title: "Permutations", diff: "M"},
+                            {id: 47, title: "Permutations II", diff: "M"},
+                            {id: 39, title: "Combination Sum", diff: "M"},
+                            {id: 40, title: "Combination Sum II", diff: "M"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 8,
+                groupName: "Group 8: Search Space Backtracking & Tries",
+                description: "Constrained combinatorial search and prefix tree structures.",
+                patterns: [
+                    {
+                        id: 22,
+                        name: "Backtracking / Grid Search",
+                        isEssential: false,
+                        problems: [
+                            {id: 79, title: "Word Search", diff: "M"},
+                            {id: 212, title: "Word Search II", diff: "H"},
+                            {id: 51, title: "N-Queens", diff: "H"},
+                            {id: 37, title: "Sudoku Solver", diff: "H"},
+                            {id: 131, title: "Palindrome Partitioning", diff: "M"},
+                            {id: 17, title: "Letter Combinations of a Phone Number", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 23,
+                        name: "Trie (Prefix Tree)",
+                        isEssential: false,
+                        problems: [
+                            {id: 208, title: "Implement Trie (Prefix Tree)", diff: "M"},
+                            {id: 211, title: "Design Add and Search Words Data Structure", diff: "M"},
+                            {id: 648, title: "Replace Words", diff: "M"},
+                            {id: 677, title: "Map Sum Pairs", diff: "M"},
+                            {id: 745, title: "Prefix and Suffix Search", diff: "H"},
+                            {id: 421, title: "Maximum XOR of Two Numbers in an Array", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 24,
+                        name: "Graph BFS & Topological Sort",
+                        isEssential: false,
+                        problems: [
+                            {id: 994, title: "Rotting Oranges", diff: "M"},
+                            {id: 207, title: "Course Schedule", diff: "M"},
+                            {id: 210, title: "Course Schedule II", diff: "M"},
+                            {id: 127, title: "Word Ladder", diff: "H"},
+                            {id: 542, title: "01 Matrix", diff: "M"},
+                            {id: 269, title: "Alien Dictionary", diff: "H"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 9,
+                groupName: "Group 9: Graph Connectivity & Grid DP",
+                description: "Disjoint set union (DSU) and 2D matrix paths.",
+                patterns: [
+                    {
+                        id: 25,
+                        name: "Union-Find (DSU)",
+                        isEssential: false,
+                        problems: [
+                            {id: 547, title: "Number of Provinces", diff: "M"},
+                            {id: 684, title: "Redundant Connection", diff: "M"},
+                            {id: 323, title: "Number of Connected Components", diff: "M"},
+                            {id: 261, title: "Graph Valid Tree", diff: "M"},
+                            {id: 1319, title: "Number of Operations to Make Network Connected", diff: "M"},
+                            {id: 721, title: "Accounts Merge", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 26,
+                        name: "2D Grid Dynamic Programming",
+                        isEssential: false,
+                        problems: [
+                            {id: 62, title: "Unique Paths", diff: "M"},
+                            {id: 63, title: "Unique Paths II", diff: "M"},
+                            {id: 64, title: "Minimum Path Sum", diff: "M"},
+                            {id: 221, title: "Maximal Square", diff: "M"},
+                            {id: 120, title: "Triangle", diff: "M"},
+                            {id: 931, title: "Minimum Falling Path Sum", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 27,
+                        name: "0/1 & Unbounded Knapsack DP",
+                        isEssential: false,
+                        problems: [
+                            {id: 416, title: "Partition Equal Subset Sum", diff: "M"},
+                            {id: 494, title: "Target Sum", diff: "M"},
+                            {id: 518, title: "Coin Change II", diff: "M"},
+                            {id: 1049, title: "Last Stone Weight II", diff: "M"},
+                            {id: 474, title: "Ones and Zeroes", diff: "M"},
+                            {id: 377, title: "Combination Sum IV", diff: "M"}
+                        ]
+                    }
+                ]
+            },
+            {
+                groupId: 10,
+                groupName: "Group 10: Advanced DP Variants & System Data Structures",
+                description: "String matching subproblems, interval DP, and O(1) streaming structures.",
+                patterns: [
+                    {
+                        id: 28,
+                        name: "String DP & Subsequences",
+                        isEssential: false,
+                        problems: [
+                            {id: 1143, title: "Longest Common Subsequence", diff: "M"},
+                            {id: 72, title: "Edit Distance", diff: "M"},
+                            {id: 516, title: "Longest Palindromic Subsequence", diff: "M"},
+                            {id: 10, title: "Regular Expression Matching", diff: "H"},
+                            {id: 44, title: "Wildcard Matching", diff: "H"},
+                            {id: 583, title: "Delete Operation for Two Strings", diff: "M"}
+                        ]
+                    },
+                    {
+                        id: 29,
+                        name: "Interval & Matrix DP",
+                        isEssential: false,
+                        problems: [
+                            {id: 312, title: "Burst Balloons", diff: "H"},
+                            {id: 1000, title: "Minimum Cost to Merge Stones", diff: "H"},
+                            {id: 1547, title: "Minimum Cost to Cut a Stick", diff: "H"},
+                            {id: 546, title: "Remove Boxes", diff: "H"},
+                            {id: 87, title: "Scramble String", diff: "H"},
+                            {id: 132, title: "Palindrome Partitioning II", diff: "H"}
+                        ]
+                    },
+                    {
+                        id: 30,
+                        name: "System Design Data Structures",
+                        isEssential: false,
+                        problems: [
+                            {id: 355, title: "Design Twitter", diff: "M"},
+                            {id: 460, title: "LFU Cache", diff: "H"},
+                            {id: 380, title: "Insert Delete GetRandom O(1)", diff: "M"},
+                            {id: 381, title: "Insert Delete GetRandom O(1) - Duplicates", diff: "H"},
+                            {id: 622, title: "Design Circular Queue", diff: "M"},
+                            {id: 901, title: "Online Stock Span", diff: "M"}
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let userProgress = JSON.parse(localStorage.getItem('dsa_progress_v3') || '{}');
+        let userNotes = JSON.parse(localStorage.getItem('dsa_notes_v3') || '{}');
+        let currentFilter = 'all';
+        let currentTheme = localStorage.getItem('dsa_theme_v3') || 'colorful'; // 'colorful' | 'dark' | 'light'
+
+        applyTheme(currentTheme);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderRoadmap();
+            updateStats();
+        });
+
+        // Tri-Theme Switcher Logic
+        function cycleTheme() {
+            if (currentTheme === 'colorful') {
+                currentTheme = 'dark';
+            } else if (currentTheme === 'dark') {
+                currentTheme = 'light';
+            } else {
+                currentTheme = 'colorful';
+            }
+            localStorage.setItem('dsa_theme_v3', currentTheme);
+            applyTheme(currentTheme);
+        }
+
+        function applyTheme(theme) {
+            const html = document.documentElement;
+            const icon = document.getElementById('themeIcon');
+            const label = document.getElementById('themeLabel');
+
+            html.classList.remove('theme-colorful', 'theme-dark', 'theme-light');
+            html.classList.add(`theme-${theme}`);
+
+            if (theme === 'colorful') {
+                if (icon) icon.innerText = '🎨';
+                if (label) label.innerText = 'Colorful';
+            } else if (theme === 'dark') {
+                if (icon) icon.innerText = '🌙';
+                if (label) label.innerText = 'Dark';
+            } else {
+                if (icon) icon.innerText = '☀️';
+                if (label) label.innerText = 'Light';
+            }
+        }
+
+        function toggleGuide() {
+            document.getElementById('guideCard').classList.toggle('hidden');
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+            });
+            const activeBtn = document.getElementById(`filter-${filter}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+            }
+            renderRoadmap();
+        }
+
+        function toggleProblem(probId) {
+            userProgress[probId] = !userProgress[probId];
+            localStorage.setItem('dsa_progress_v3', JSON.stringify(userProgress));
+            updateStats();
+
+            const checkbox = document.getElementById(`check-${probId}`);
+            const titleEl = document.getElementById(`title-${probId}`);
+            if (checkbox && titleEl) {
+                checkbox.checked = userProgress[probId];
+                if (userProgress[probId]) {
+                    titleEl.classList.add('line-through', 'opacity-50');
+                    confetti({particleCount: 25, spread: 50, origin: {y: 0.8}});
+                } else {
+                    titleEl.classList.remove('line-through', 'opacity-50');
+                }
+            }
+        }
+
+        function toggleNoteDrawer(patternId) {
+            const drawer = document.getElementById(`note-drawer-${patternId}`);
+            if (drawer) drawer.classList.toggle('hidden');
+        }
+
+        function saveNote(patternId) {
+            const noteText = document.getElementById(`note-input-${patternId}`).value;
+            userNotes[patternId] = noteText;
+            localStorage.setItem('dsa_notes_v3', JSON.stringify(userNotes));
+            const statusEl = document.getElementById(`note-status-${patternId}`);
+            if (statusEl) {
+                statusEl.innerText = "Saved!";
+                setTimeout(() => {statusEl.innerText = "";}, 2000);
+            }
+        }
+
+        function updateStats() {
+            let totalCount = 0, solvedCount = 0;
+            let easySolved = 0, easyTotal = 0;
+            let mediumSolved = 0, mediumTotal = 0;
+            let hardSolved = 0, hardTotal = 0;
+            let top10Solved = 0, top10Total = 0;
+
+            GROUPS_DATA.forEach(group => {
+                group.patterns.forEach(pattern => {
+                    pattern.problems.forEach(prob => {
+                        totalCount++;
+                        if (prob.diff === 'E') easyTotal++;
+                        if (prob.diff === 'M') mediumTotal++;
+                        if (prob.diff === 'H') hardTotal++;
+                        if (pattern.isEssential) top10Total++;
+
+                        if (userProgress[prob.id]) {
+                            solvedCount++;
+                            if (prob.diff === 'E') easySolved++;
+                            if (prob.diff === 'M') mediumSolved++;
+                            if (prob.diff === 'H') hardSolved++;
+                            if (pattern.isEssential) top10Solved++;
+                        }
+                    });
+                });
+            });
+
+            const percentage = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
+            document.getElementById('overallPercentage').innerText = `${percentage}%`;
+            document.getElementById('overallStats').innerText = `${solvedCount} of ${totalCount} Solved`;
+
+            const easyPct = totalCount > 0 ? (easySolved / totalCount) * 100 : 0;
+            const mediumPct = totalCount > 0 ? (mediumSolved / totalCount) * 100 : 0;
+            const hardPct = totalCount > 0 ? (hardSolved / totalCount) * 100 : 0;
+
+            document.getElementById('segmentEasy').style.width = `${easyPct}%`;
+            document.getElementById('segmentMedium').style.width = `${mediumPct}%`;
+            document.getElementById('segmentHard').style.width = `${hardPct}%`;
+
+            const easyDiffPct = easyTotal > 0 ? Math.round((easySolved / easyTotal) * 100) : 0;
+            const mediumDiffPct = mediumTotal > 0 ? Math.round((mediumSolved / mediumTotal) * 100) : 0;
+            const hardDiffPct = hardTotal > 0 ? Math.round((hardSolved / hardTotal) * 100) : 0;
+
+            document.getElementById('easySegmentText').innerText = `Easy: ${easySolved}/${easyTotal} (${easyDiffPct}%)`;
+            document.getElementById('mediumSegmentText').innerText = `Medium: ${mediumSolved}/${mediumTotal} (${mediumDiffPct}%)`;
+            document.getElementById('hardSegmentText').innerText = `Hard: ${hardSolved}/${hardTotal} (${hardDiffPct}%)`;
+
+            document.getElementById('easyStats').innerText = `${easySolved}/${easyTotal}`;
+            document.getElementById('mediumStats').innerText = `${mediumSolved}/${mediumTotal}`;
+            document.getElementById('hardStats').innerText = `${hardSolved}/${hardTotal}`;
+
+            const top10Percentage = top10Total > 0 ? Math.round((top10Solved / top10Total) * 100) : 0;
+            document.getElementById('top10StatsText').innerText = `${top10Solved} / ${top10Total}`;
+            document.getElementById('top10ProgressBar').style.width = `${top10Percentage}%`;
+        }
+
+        function renderRoadmap() {
+            const container = document.getElementById('roadmapContainer');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+            container.innerHTML = '';
+
+            GROUPS_DATA.forEach(group => {
+                let groupHasVisibleContent = false;
+
+                const groupCard = document.createElement('div');
+                groupCard.className = "glass rounded-2xl p-6 border border-theme-main space-y-6";
+
+                let groupHeaderHTML = `
+                    <div>
+                        <h2 class="text-xl font-bold text-theme-main">${group.groupName}</h2>
+                        <p class="text-xs text-theme-muted mt-1">${group.description}</p>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                `;
+
+                let patternsHTML = '';
+
+                group.patterns.forEach(pattern => {
+                    if (currentFilter === 'top10' && !pattern.isEssential) return;
+
+                    const filteredProblems = pattern.problems.filter(prob => {
+                        const matchesSearch = prob.title.toLowerCase().includes(searchVal) ||
+                            prob.id.toString().includes(searchVal) ||
+                            pattern.name.toLowerCase().includes(searchVal);
+
+                        const isDone = !!userProgress[prob.id];
+                        if (currentFilter === 'pending' && isDone) return false;
+                        if (currentFilter === 'completed' && !isDone) return false;
+                        if (currentFilter === 'easy' && prob.diff !== 'E') return false;
+                        if (currentFilter === 'medium' && prob.diff !== 'M') return false;
+                        if (currentFilter === 'hard' && prob.diff !== 'H') return false;
+
+                        return matchesSearch;
+                    });
+
+                    if (filteredProblems.length === 0 && searchVal !== '') return;
+                    if (filteredProblems.length === 0 && (currentFilter !== 'all' && currentFilter !== 'top10')) return;
+
+                    groupHasVisibleContent = true;
+
+                    const savedNote = userNotes[pattern.id] !== undefined ? userNotes[pattern.id] : (STARTER_TEMPLATES[pattern.id] || '');
+                    const solvedInPattern = pattern.problems.filter(p => userProgress[p.id]).length;
+
+                    patternsHTML += `
+                        <div class="bg-theme-card-inner rounded-xl p-4 border ${pattern.isEssential ? 'card-glow-priority' : 'border-theme-card'} flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="flex items-start justify-between gap-2 mb-3">
+                                    <div>
+                                        <div class="flex items-center gap-1.5">
+                                            <h3 class="font-bold text-sm text-theme-main">${pattern.name}</h3>
+                                            ${pattern.isEssential ? '<span class="text-[10px] bg-theme-pill text-theme-pill border border-theme-pill font-bold px-1.5 py-0.5 rounded">ESSENTIAL</span>' : ''}
+                                        </div>
+                                        <span class="text-[11px] text-theme-muted font-mono">${solvedInPattern}/${pattern.problems.length} Done</span>
+                                    </div>
+                                    <button onclick="toggleNoteDrawer(${pattern.id})" class="text-xs btn-secondary px-2 py-1 rounded transition-all flex items-center gap-1">
+                                        📝 Notes
+                                    </button>
+                                </div>
+
+                                <div id="note-drawer-${pattern.id}" class="hidden mb-3 p-2.5 rounded-lg bg-theme-drawer border border-theme-card space-y-2">
+                                    <textarea id="note-input-${pattern.id}" placeholder="Write template code or takeaways..." class="w-full h-28 p-2 bg-theme-input text-xs font-mono text-theme-main rounded border border-theme-card focus:outline-none focus:border-indigo-500 resize-y">${savedNote}</textarea>
+                                    <div class="flex justify-between items-center">
+                                        <span id="note-status-${pattern.id}" class="text-[10px] text-emerald-400 font-semibold"></span>
+                                        <button onclick="saveNote(${pattern.id})" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-[11px] rounded">Save Note</button>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    ${filteredProblems.map(prob => {
+                        const isChecked = !!userProgress[prob.id];
+                        let diffBadge = '';
+                        if (prob.diff === 'E') diffBadge = '<span class="text-[10px] font-bold badge-easy px-1.5 py-0.5 rounded">E</span>';
+                        if (prob.diff === 'M') diffBadge = '<span class="text-[10px] font-bold badge-medium px-1.5 py-0.5 rounded">M</span>';
+                        if (prob.diff === 'H') diffBadge = '<span class="text-[10px] font-bold badge-hard px-1.5 py-0.5 rounded">H</span>';
+
+                        return `
+                                            <div class="flex items-center justify-between gap-2 p-2 rounded-lg bg-theme-drawer border border-theme-card transition-all">
+                                                <div class="flex items-center gap-2 overflow-hidden">
+                                                    <input type="checkbox" id="check-${prob.id}" ${isChecked ? 'checked' : ''} onchange="toggleProblem(${prob.id})" class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                                                    <a href="https://leetcode.com/problems/${prob.title.toLowerCase().replace(/[^a-z0-0\s]/g, '').replace(/\s+/g, '-')}" target="_blank" rel="noopener noreferrer" id="title-${prob.id}" class="text-xs font-medium text-theme-sub hover:text-indigo-400 truncate ${isChecked ? 'line-through opacity-50' : ''}">
+                                                        ${prob.id}.${prob.title}
+                                                    </a>
+                                                </div>
+                                                <div class="flex items-center gap-1.5 shrink-0">
+                                                    ${diffBadge}
+                                                </div>
+                                            </div>
+                                        `;
+                    }).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                if (groupHasVisibleContent) {
+                    groupCard.innerHTML = groupHeaderHTML + patternsHTML + `</div>`;
+                    container.appendChild(groupCard);
+                }
+            });
+
+            if (container.children.length === 0) {
+                container.innerHTML = `
+                    <div class="glass rounded-2xl p-12 text-center border border-theme-main text-theme-muted space-y-3">
+                        <div class="text-3xl">🔍</div>
+                        <p class="font-semibold text-theme-main">No patterns or problems match your query.</p>
+                        <button onclick="setFilter('all')" class="px-4 py-2 text-xs font-bold bg-indigo-600 text-white rounded-xl shadow-md">Reset Filters</button>
+                    </div>
+                `;
+            }
+        }
+
+        function exportData() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
+                progress: userProgress,
+                notes: userNotes,
+                theme: currentTheme
+            }));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `DSA_Roadmap_Backup_${new Date().toISOString().slice(0, 10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function triggerImport() {
+            document.getElementById('importInput').click();
+        }
+
+        function importData(event) {
+            const fileReader = new FileReader();
+            fileReader.onload = function (e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (parsed.progress) userProgress = parsed.progress;
+                    if (parsed.notes) userNotes = parsed.notes;
+                    if (parsed.theme) {
+                        currentTheme = parsed.theme;
+                        applyTheme(currentTheme);
+                    }
+                    localStorage.setItem('dsa_progress_v3', JSON.stringify(userProgress));
+                    localStorage.setItem('dsa_notes_v3', JSON.stringify(userNotes));
+                    localStorage.setItem('dsa_theme_v3', currentTheme);
+                    renderRoadmap();
+                    updateStats();
+                    alert("Import successful!");
+                } catch (err) {
+                    alert("Invalid JSON format.");
+                }
+            };
+            if (event.target.files[0]) fileReader.readAsText(event.target.files[0]);
+        }
+
+        function openResetStep1() {
+            document.getElementById('resetModal').classList.remove('hidden');
+            document.getElementById('resetStep1').classList.remove('hidden');
+            document.getElementById('resetStep2').classList.add('hidden');
+        }
+
+        function openResetStep2() {
+            document.getElementById('resetStep1').classList.add('hidden');
+            document.getElementById('resetStep2').classList.remove('hidden');
+            document.getElementById('resetConfirmInput').value = '';
+            document.getElementById('finalResetBtn').disabled = true;
+            document.getElementById('finalResetBtn').className = "px-4 py-2 text-sm font-semibold rounded-xl bg-rose-600/50 text-slate-400 cursor-not-allowed";
+        }
+
+        function closeResetModal() {
+            document.getElementById('resetModal').classList.add('hidden');
+        }
+
+        function checkResetTyped() {
+            const val = document.getElementById('resetConfirmInput').value;
+            const btn = document.getElementById('finalResetBtn');
+            if (val === 'RESET') {
+                btn.disabled = false;
+                btn.className = "px-4 py-2 text-sm font-semibold rounded-xl bg-rose-600 hover:bg-rose-500 text-white shadow-lg cursor-pointer";
+            } else {
+                btn.disabled = true;
+                btn.className = "px-4 py-2 text-sm font-semibold rounded-xl bg-rose-600/50 text-slate-400 cursor-not-allowed";
+            }
+        }
+
+        function executeResetData() {
+            userProgress = {};
+            userNotes = {};
+            localStorage.removeItem('dsa_progress_v3');
+            localStorage.removeItem('dsa_notes_v3');
+            closeResetModal();
+            renderRoadmap();
+            updateStats();
+        }
+    </script>
+</body>
+
+</html>
